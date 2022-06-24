@@ -1,0 +1,38 @@
+from pymorphy2 import MorphAnalyzer
+def new_list(name_list):
+    ma = MorphAnalyzer()
+    lists = [
+        ('вода', 'мода'),
+        ('лето', 'лото'),
+        ('гарнитур', 'монитор'),
+        ('жизнь', 'июнь'),
+        ('нобель', 'мебель'),
+        ('самокат', 'самовар'),
+        ('лось', 'лес')
+             ]
+    for i in lists:
+         for j in lists:
+             if i != j:
+                 nf_i = ma.parse(i)[0].normal_form
+                 nf_j = ma.parse(j)[0].normal_form
+
+def compare(S1, S2):
+    ngrams = [S1[i:i + 3] for i in range(len(S1))]
+    count = 0
+    for ngram in ngrams:
+        count += S2.count(ngram)
+
+    return count / max(len(S1), len(S2))
+lists = [
+    ('вода', 'мода'),
+    ('лето', 'лото'),
+    ('гарнитур', 'монитор'),
+    ('жизнь', 'июнь'),
+    ('нобель', 'мебель'),
+    ('самокат', 'самовар'),
+    ('лось', 'лес')
+    ]
+for i, j in lists:
+    print(i, j, compare(i, j))
+if __name__ == '__main__':
+    print('модуль работает!')
